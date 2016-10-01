@@ -1,9 +1,20 @@
-var Search = () => (
+var Search = (props) => (
   <div className="search-bar form-inline">
-    <input className="form-control" type="text" />
-    <button className="btn hidden-sm-down">
-      <span className="glyphicon glyphicon-search"></span>
-    </button>
+    <form>
+      <input id="search" className="form-control" type="text"/>
+      <button id="searchButton" className="btn" onClick={(event) => {
+        console.log('button clicked');
+        props.searchYouTube({
+          key: YOUTUBE_API_KEY,
+          max: 10,
+          query: document.getElementById('search').value
+        }, props.callback);
+        document.getElementById('search').value = '';
+        event.preventDefault();
+      }}>
+        <span className="glyphicon glyphicon-search"></span>
+      </button>
+    </form>
   </div> 
 );
 

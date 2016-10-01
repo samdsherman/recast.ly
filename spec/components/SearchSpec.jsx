@@ -29,6 +29,7 @@ describe ('Search', function() {
     it('should update the video list when typing into the input box', function() {
       var videoEntryTitleElements = scryRenderedDOMComponentsWithClass(app, 'video-list-entry-title');
       videoEntryTitleElements.forEach((videoEntryTitle, i) => {
+        console.log(videoEntryTitle.innerHTML);
         expect(videoEntryTitle.innerHTML).to.equal(fakeVideoData[i].snippet.title);
       });
 
@@ -36,7 +37,9 @@ describe ('Search', function() {
       Simulate.change(searchInputElement, {target: {value: 'React tutorial'}});
 
       var newVideoEntryTitleElements = scryRenderedDOMComponentsWithClass(app, 'video-list-entry-title');
+      console.log(newVideoEntryTitleElements);
       newVideoEntryTitleElements.forEach((videoEntryTitle, i) => {
+        console.log(videoEntryTitle.innerHTML);
         expect(videoEntryTitle.innerHTML).to.equal(moreFakeVideoData[i].snippet.title);
       });
     });

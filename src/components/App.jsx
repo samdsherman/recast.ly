@@ -10,17 +10,19 @@ class App extends React.Component {
 
   }
 
+  updateVideoData(videoData) {
+    this.setState({
+      searchResults: videoData,
+      currentVideo: videoData[0]
+    });
+  }
+
   componentDidMount() {
     this.props.searchYouTube({
       key: YOUTUBE_API_KEY,
       query: 'cats',
       max: 10
-    }, (videoData) => {
-      this.setState({
-        searchResults: videoData,
-        currentVideo: videoData[0]
-      });
-    });
+    }, this.updateVideoData.bind(this));
   }
 
   videoChange(video) {
@@ -33,7 +35,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav searchYouTube={this.props.searchYouTube} callback={this.updateVideoData.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
