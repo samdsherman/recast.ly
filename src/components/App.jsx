@@ -3,12 +3,26 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      searchResults: exampleVideoData,
       currentVideo: exampleVideoData[0]
     };
+
+    props.searchYouTube({
+      key: window.YOUTUBE_API_KEY,
+      query: 'cats',
+      max: 10
+    }, (videoData) => {
+      this.setState({
+        searchResults: videoData,
+        currentVideo: videoData[0]
+      });
+    });
+
   }
 
   videoChange(video) {
     this.setState({
+      searchResults: this.state.searchResults,
       currentVideo: video
     });
   }
@@ -21,7 +35,7 @@ class App extends React.Component {
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={exampleVideoData} clickHandler={video=>this.videoChange(video)}/>
+          <VideoList videos={this.state.searchResults} clickHandler={video=>this.videoChange(video)}/>
         </div>
       </div>
     );
