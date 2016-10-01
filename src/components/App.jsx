@@ -2,13 +2,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+
     this.state = {
-      searchResults: exampleVideoData,
+      searchResults: [],
       currentVideo: exampleVideoData[0]
     };
 
-    props.searchYouTube({
-      key: window.YOUTUBE_API_KEY,
+  }
+
+  componentDidMount() {
+    this.props.searchYouTube({
+      key: YOUTUBE_API_KEY,
       query: 'cats',
       max: 10
     }, (videoData) => {
@@ -17,7 +21,6 @@ class App extends React.Component {
         currentVideo: videoData[0]
       });
     });
-
   }
 
   videoChange(video) {
