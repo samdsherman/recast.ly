@@ -1,7 +1,7 @@
 var Search = (props) => (
   <div className="search-bar form-inline">
     <form>
-      <input id="search" className="form-control" type="text"/>
+      <input id="search" className="form-control" type="text" />
       <button id="searchButton" className="btn" onClick={(event) => {
         console.log('button clicked');
         props.searchYouTube({

@@ -17,6 +17,14 @@ var searchYouTube = (options, callback) => {
     console.log(data.items);
     callback(data.items);
   });
+  var headers = new Headers({
+    part: 'snippet',
+    type: 'video',
+    videoEmbeddable: true,
+    key: options.key,
+    q: options.query,
+    maxResults: options.max
+  });
 };
 
 window.searchYouTube = searchYouTube;
